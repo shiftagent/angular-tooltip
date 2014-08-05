@@ -28,7 +28,7 @@
         var template = options.template || $templateCache.get(options.templateUrl),
             scope    = options.scope || $rootScope.$new(),
             target   = options.target,
-            elem     = $compile(template)(scope),
+            elem     = $compile(template)(scope)[0],
             tether;
 
         /**
