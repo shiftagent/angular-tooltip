@@ -6,7 +6,7 @@
 
   module.provider('$tooltip', function() {
     // Default template for tooltips.
-    var defaultTemplateUrl = 'template/ng-tooltip.html'
+    var defaultTemplateUrl = 'template/ng-tooltip.html';
     this.setDefaultTemplateUrl = function(templateUrl) {
       defaultTemplateUrl = templateUrl;
     };
@@ -30,11 +30,9 @@
             target   = options.target,
             tether, elem;
 
-        if(template) {
-          elem     = $compile(template)(scope)[0];
-        } else if(options.templateUrl) {
+        if(!template && options.templateUrl) {
           $http.get(options.templateUrl, { cache: $templateCache }).then(function(resp) {
-            elem = $compile(resp.data)(scope)[0];
+            template = resp.data;
           });
         }
 
@@ -42,11 +40,11 @@
          * Attach a tether to the tooltip and the target element.
          */
         function attachTether() {
-          new Tether(extend({
+          tether = new Tether(extend({
             element: elem,
             target: target
           }, options.tether));
-        };
+        }
 
         /**
          * Detach the tether.
@@ -54,16 +52,20 @@
         function detachTether() {
           if (tether) {
             tether.destroy();
+            tether = undefined;
+            elem.remove();
+            angular.element(elem).scope().$destroy();
           }
-        };
+        }
 
         /**
          * Open the tooltip
          */
         function open() {
+          elem = $compile(template)(scope.$new())[0];
           $animate.enter(elem, null, target);
           attachTether();
-        };
+        }
 
         /**
          * Close the tooltip
@@ -71,7 +73,7 @@
         function close() {
           $animate.leave(elem);
           detachTether();
-        };
+        }
 
         // Close the tooltip when the scope is destroyed.
         scope.$on('$destroy', close);
@@ -81,7 +83,7 @@
           close: close
         };
       };
-    }
+    };
   });
 
   module.provider('$tooltipDirective', function() {
