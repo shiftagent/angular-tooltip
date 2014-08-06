@@ -19,7 +19,7 @@
       extend(defaultTetherOptions, options);
     };
 
-    this.$get = function($rootScope, $animate, $compile, $templateCache) {
+    this.$get = function($rootScope, $animate, $compile, $templateCache, $http) {
       return function(options) {
         options = options || {};
         options = extend({ templateUrl: defaultTemplateUrl }, options);
@@ -28,8 +28,15 @@
         var template = options.template || $templateCache.get(options.templateUrl),
             scope    = options.scope || $rootScope.$new(),
             target   = options.target,
-            elem     = $compile(template)(scope)[0],
-            tether;
+            tether, elem;
+
+        if(template) {
+          elem     = $compile(template)(scope)[0];
+        } else if(options.templateUrl) {
+          $http.get(options.templateUrl, { cache: $templateCache }).then(function(resp) {
+            elem = $compile(resp.data)(scope)[0];
+          });
+        }
 
         /**
          * Attach a tether to the tooltip and the target element.
