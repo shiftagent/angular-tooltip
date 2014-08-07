@@ -19,7 +19,7 @@
       extend(defaultTetherOptions, options);
     };
 
-    this.$get = function($rootScope, $animate, $compile, $templateCache, $http) {
+    this.$get = function($rootScope, $animate, $compile, $templateCache, $http, $timeout) {
       return function(options) {
         options = options || {};
         options = extend({ templateUrl: defaultTemplateUrl }, options);
@@ -65,6 +65,7 @@
           elem = $compile(template)(scope.$new())[0];
           $animate.enter(elem, null, target);
           attachTether();
+          $timeout(function() { tether.position(); }, 1);
         }
 
         /**
