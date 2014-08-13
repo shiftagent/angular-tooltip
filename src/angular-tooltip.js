@@ -63,6 +63,7 @@
          */
         function open() {
           elem = $compile(template)(scope.$new())[0];
+          result.elem = elem;
           $animate.enter(elem, null, target);
           attachTether();
           $timeout(function() { tether.position(); }, 1);
@@ -72,6 +73,7 @@
          * Close the tooltip
          */
         function close() {
+          delete result.elem;
           $animate.leave(elem);
           detachTether();
         }
@@ -79,10 +81,12 @@
         // Close the tooltip when the scope is destroyed.
         scope.$on('$destroy', close);
 
-        return {
+        var result =  {
           open: open,
           close: close
         };
+
+        return result;
       };
     };
   });
