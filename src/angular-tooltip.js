@@ -62,11 +62,13 @@
          * Open the tooltip
          */
         function open() {
-          elem = $compile(template)(scope.$new())[0];
+          var tetherScope = scope.$new();
+          elem = $compile(template)(tetherScope)[0];
+          tetherScope.$digest();
           result.elem = elem;
           $animate.enter(elem, null, target);
           attachTether();
-          $timeout(function() { tether.position(); }, 1);
+          tether.position();
         }
 
         /**
