@@ -64,7 +64,9 @@
         function open() {
           var tetherScope = scope.$new();
           elem = $compile(template)(tetherScope)[0];
-          tetherScope.$digest();
+          if(!tetherScope.$$phase) {
+            tetherScope.$digest();
+          }
           result.elem = elem;
           $animate.enter(elem, null, target);
           attachTether();
