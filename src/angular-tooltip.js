@@ -64,7 +64,7 @@
         function open() {
           var tetherScope = scope.$new();
           elem = $compile(template)(tetherScope)[0];
-          if(!tetherScope.$$phase) {
+          if(!$rootScope.$$phase) {
             tetherScope.$digest();
           }
           result.elem = elem;
