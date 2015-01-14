@@ -53,7 +53,7 @@
           if (tether) {
             tether.destroy();
             tether = undefined;
-            elem.remove();
+            angular.element(elem).remove();
             angular.element(elem).scope().$destroy();
           }
         }
