@@ -7,7 +7,6 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-ngmin": "~0.0.3",
-    "grunt-karma": "~0.6.2",
     "load-grunt-tasks": "~0.2.0",
     "karma": "latest",
     "karma-mocha": "latest",
@@ -22,5 +21,8 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt-karma": "^0.10.1"
   }
 }
