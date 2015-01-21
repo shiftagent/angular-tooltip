@@ -1,12 +1,12 @@
 (function(angular) {
   'use strict';
 
-  var module = angular.module('ngTooltip', ['ng']),
+  var module = angular.module('saTooltip', ['sa']),
       extend = angular.extend;
 
-  module.provider('$tooltip', function() {
+  module.provider('$saTooltip', function() {
     // Default template for tooltips.
-    var defaultTemplateUrl = 'template/ng-tooltip.html';
+    var defaultTemplateUrl = 'template/sa-tooltip.html';
     this.setDefaultTemplateUrl = function(templateUrl) {
       defaultTemplateUrl = templateUrl;
     };
@@ -95,14 +95,14 @@
     };
   });
 
-  module.provider('$tooltipDirective', function() {
+  module.provider('$saTooltipDirective', function() {
 
     /**
      * Returns a factory function for building a directive for tooltips.
      *
      * @param {String} name - The name of the directive.
      */
-    this.$get = function($tooltip) {
+    this.$get = function($saTooltip) {
       return function(name, options) {
         return {
           restrict: 'EA',
@@ -111,7 +111,7 @@
             tether:  '=?' + name + 'Tether'
           },
           link: function(scope, elem, attrs) {
-            var tooltip = $tooltip(extend({
+            var tooltip = $saTooltip(extend({
               target: elem,
               scope: scope
             }, options, { tether: scope.tether }));
@@ -130,12 +130,12 @@
     };
   });
 
-  module.directive('ngTooltip', function($tooltipDirective) {
-    return $tooltipDirective('ngTooltip');
+  module.directive('saTooltip', function($saTooltipDirective) {
+    return $saTooltipDirective('saTooltip');
   });
 
   module.run(function($templateCache) {
-    $templateCache.put('template/ng-tooltip.html', '<div class="tooltip">{{content}}</div>');
+    $templateCache.put('template/sa-tooltip.html', '<div class="tooltip">{{content}}</div>');
   });
 
 })(angular);
