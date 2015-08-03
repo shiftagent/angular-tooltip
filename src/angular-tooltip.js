@@ -30,6 +30,10 @@
             target   = options.target,
             tether, elem;
 
+        if (template instanceof Array) {
+          template = template[1];
+        }
+
         if(!template && options.templateUrl) {
           $http.get(options.templateUrl, { cache: $templateCache }).then(function(resp) {
             template = resp.data;
