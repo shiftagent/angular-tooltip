@@ -68,6 +68,7 @@
         function open() {
           var tetherScope = scope.$new();
           elem = $compile(template)(tetherScope)[0];
+
           if(!$rootScope.$$phase) {
             tetherScope.$digest();
           }
@@ -83,7 +84,9 @@
          */
         function close() {
           delete result.elem;
-          $animate.leave(elem);
+          if (elem) {
+            $animate.leave(elem);
+          }
           detachTether();
         }
 
