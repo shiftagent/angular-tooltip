@@ -1,4 +1,5 @@
 {
+  "version": "0.1.0",
   "name": "remind101.js",
   "description": "Restangular client for the Remind101 API",
   "devDependencies": {
