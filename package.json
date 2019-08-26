@@ -1,7 +1,7 @@
 {
   "version": "0.1.0",
-  "name": "remind101.js",
-  "description": "Restangular client for the Remind101 API",
+  "name": "sa-tooltip",
+  "description": "sa-tooltip code",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.0",
