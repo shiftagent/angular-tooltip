@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "sa-tooltip",
   "description": "sa-tooltip code",
   "main": "src/angular-tooltip.js",
