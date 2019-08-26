@@ -2,6 +2,7 @@
   "version": "0.1.0",
   "name": "sa-tooltip",
   "description": "sa-tooltip code",
+  "main": "src/angular-tooltip.js",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.0",
